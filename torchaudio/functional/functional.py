@@ -390,7 +390,7 @@ def amplitude_to_DB(
     if top_db is not None:
         # Expand batch
         shape = x_db.size()
-        packed_channels = shape[-3] if x_db.dim() > 2 else 1
+        packed_channels = shape[-3] if x_db.dim() > 3 else 1
         x_db = x_db.reshape(-1, packed_channels, shape[-2], shape[-1])
 
         x_db = torch.max(x_db, (x_db.amax(dim=(-3, -2, -1)) - top_db).view(-1, 1, 1, 1))
